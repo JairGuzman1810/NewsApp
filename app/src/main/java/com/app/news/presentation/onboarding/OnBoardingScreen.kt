@@ -31,13 +31,17 @@ import kotlinx.coroutines.launch
  * The main composable for the onboarding screen.
  *
  * This screen displays a series of pages to introduce the user to the app's
- * features. It uses a HorizontalPager to allow the user to swipe through
+ * features. It uses a `HorizontalPager` to allow the user to swipe through
  * the pages. It also includes navigation buttons and a page indicator.
  *
+ * @param event A lambda function to handle onboarding events. This function
+ *              takes an `OnBoardingEvent` as a parameter and is used to
+ *              communicate events from the UI to the ViewModel.
  * @param modifier The modifier to be applied to the layout.
  */
 @Composable
 fun OnBoardingScreen(
+    event: (OnBoardingEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -120,8 +124,8 @@ fun OnBoardingScreen(
                     onClick = { // The action to perform when the button is clicked.
                         scope.launch { // Launch a coroutine.
                             if (pagerState.currentPage == pages.lastIndex) {
-                                // If on the last page, navigate to the home screen.
-                                // TODO: Navigate to the home screen.
+                                // If on the last page, save the app entry status and navigate to the home screen.
+                                event(OnBoardingEvent.SaveAppEntry)
                             } else {
                                 pagerState.animateScrollToPage( // Go to the next page.
                                     page = pagerState.currentPage + 1
@@ -147,6 +151,8 @@ fun OnBoardingScreen(
 @Composable
 private fun OnBoardingScreenPreview() {
     NewsAppTheme {
-        OnBoardingScreen()
+        OnBoardingScreen(
+            event = {}
+        )
     }
 }
