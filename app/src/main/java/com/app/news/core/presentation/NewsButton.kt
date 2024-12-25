@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.app.news.ui.theme.NewsAppTheme
+import com.app.news.presentation.theme.NewsAppTheme
 
 /**
  * A custom button composable used throughout the application.

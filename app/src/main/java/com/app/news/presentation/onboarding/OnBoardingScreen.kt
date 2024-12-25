@@ -24,7 +24,7 @@ import com.app.news.presentation.Dimens.MediumPadding2
 import com.app.news.presentation.Dimens.PageIndicatorWidth
 import com.app.news.presentation.onboarding.components.OnBoardingPage
 import com.app.news.presentation.onboarding.components.PageIndicator
-import com.app.news.ui.theme.NewsAppTheme
+import com.app.news.presentation.theme.NewsAppTheme
 import kotlinx.coroutines.launch
 
 /**

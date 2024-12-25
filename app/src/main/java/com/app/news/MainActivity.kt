@@ -1,14 +1,20 @@
 package com.app.news
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
+import com.app.news.domain.usecases.AppEntryUseCases
 import com.app.news.presentation.onboarding.OnBoardingScreen
-import com.app.news.ui.theme.NewsAppTheme
+import com.app.news.presentation.theme.NewsAppTheme
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * The main activity of the application.
@@ -16,18 +22,17 @@ import com.app.news.ui.theme.NewsAppTheme
  * This activity is responsible for setting up the UI and displaying the
  * initial screen of the app.
  */
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     /**
-     * Called when the activity is starting.
+     * The use cases related to app entry.
      *
-     * This is where most initialization should go: calling `setContentView`
-     * to inflate the activity's UI, using `findViewById` to programmatically
-     * interact with widgets in the UI, and setting up listeners.
-     *
-     * @param savedInstanceState If the activity is being re-initialized after
-     *     previously being shut down then this Bundle contains the data it most
-     *     recently supplied in [onSaveInstanceState].
+     * This property is injected by Hilt and provides access to the
+     * ReadAppEntry and SaveAppEntry use cases.
      */
+    @Inject
+    lateinit var appEntryUseCases: AppEntryUseCases
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,6 +42,13 @@ class MainActivity : ComponentActivity() {
         // Enable edge-to-edge display.
         enableEdgeToEdge()
 
+        // Launch a coroutine in the activity's lifecycle scope to read the app entry status.
+        lifecycleScope.launch {
+            appEntryUseCases.readAppEntry().collect {
+                // Log the app entry status.
+                Log.d("TAG", "onCreate: $it")
+            }
+        }
         // Set the content of the activity using Jetpack Compose.
         setContent {
             // Apply the app's theme.

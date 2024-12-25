@@ -14,8 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.app.news.presentation.Dimens.IndicatorSize
 import com.app.news.presentation.onboarding.pages
-import com.app.news.ui.theme.BlueGray
-import com.app.news.ui.theme.NewsAppTheme
+import com.app.news.presentation.theme.BlueGray
+import com.app.news.presentation.theme.NewsAppTheme
 /**
  * A composable function that displays a row of indicators representing the current page
  * in a multi-page layout, such as an onboarding flow.

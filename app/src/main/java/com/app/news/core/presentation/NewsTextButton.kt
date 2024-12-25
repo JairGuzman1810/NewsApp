@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.app.news.ui.theme.NewsAppTheme
-import com.app.news.ui.theme.WhiteGray
+import com.app.news.presentation.theme.NewsAppTheme
+import com.app.news.presentation.theme.WhiteGray
 
 /**
  * A custom text button composable used throughout the application.

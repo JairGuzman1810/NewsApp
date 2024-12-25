@@ -21,7 +21,7 @@ import com.app.news.presentation.Dimens.MediumPadding1
 import com.app.news.presentation.Dimens.MediumPadding2
 import com.app.news.presentation.onboarding.Page
 import com.app.news.presentation.onboarding.pages
-import com.app.news.ui.theme.NewsAppTheme
+import com.app.news.presentation.theme.NewsAppTheme
 
 /**
  * A composable function that displays a single page in the onboarding flow.
