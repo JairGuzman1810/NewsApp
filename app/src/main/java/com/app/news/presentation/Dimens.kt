@@ -31,4 +31,13 @@ object Dimens {
      * This value defines the diameter of the indicator dots.
      */
     val IndicatorSize = 14.dp
+
+    /**
+     * The width of the page indicator row.
+     *
+     * This value defines the total width of the row that contains the page
+     * indicator dots. It's used to ensure that the indicator has enough space
+     * to display all the dots.
+     */
+    val PageIndicatorWidth = 52.dp
 }

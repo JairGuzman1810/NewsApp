@@ -5,8 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.app.news.presentation.onboarding.OnBoardingScreen
@@ -43,15 +41,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             // Apply the app's theme.
             NewsAppTheme {
-                // Use a Scaffold to provide a basic layout structure.
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding -> // Make the scaffold fill the available space.
-                    // Display the onboarding screen.
-                    OnBoardingScreen(
-                        modifier = Modifier
-                            .fillMaxSize() // Make the onboarding screen fill the available space.
-                            .padding(innerPadding) // Apply the inner padding provided by the Scaffold.
-                    )
-                }
+                // Display the onboarding screen.
+                OnBoardingScreen(
+                    modifier = Modifier
+                        .fillMaxSize() // Make the onboarding screen fill the available space.
+                )
             }
         }
     }
