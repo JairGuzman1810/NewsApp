@@ -1,4 +1,4 @@
-package com.app.news.domain.usecases
+package com.app.news.domain.usecases.app_entry
 
 /**
  * Data class to hold all use cases related to app entry.
