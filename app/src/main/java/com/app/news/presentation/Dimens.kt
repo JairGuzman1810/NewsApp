@@ -18,7 +18,7 @@ object Dimens {
     val MediumPadding1 = 24.dp
 
     /**
-     * Another medium padding value, slightly larger than [MediumPadding1].
+     * Another medium padding value, slightly larger than MediumPadding1.
      *
      * This padding is used in places where a bit more space is needed, such as
      * the horizontal padding around text content.
@@ -40,4 +40,36 @@ object Dimens {
      * to display all the dots.
      */
     val PageIndicatorWidth = 52.dp
+
+    /**
+     * The size of the article card in the home screen.
+     *
+     * This value defines the height and width of the article card.
+     */
+    val ArticleCardSize = 96.dp
+
+    /**
+     * An extra small padding value, used for very fine spacing adjustments.
+     *
+     * This padding is used in places where a minimal amount of space is
+     * needed, such as between small icons and text.
+     */
+    val ExtraSmallPadding = 3.dp
+
+    /**
+     * Another extra small padding value, slightly larger than ExtraSmallPadding.
+     *
+     * This padding is used in places where a bit more space is needed than
+     * ExtraSmallPadding, such as between text and a small icon.
+     */
+    val ExtraSmallPadding2 = 6.dp
+
+    /**
+     * The size of small icons used throughout the app.
+     *
+     * This value defines the height and width of small icons, such as the
+     * time icon in the article card.
+     */
+    val SmallIconSize = 11.dp
+
 }

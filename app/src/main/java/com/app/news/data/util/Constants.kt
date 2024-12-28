@@ -34,5 +34,13 @@ object Constants {
      * It's used as a parameter in API requests to identify and authorize
      * the application.
      */
-    const val API_KEY = "fb1f5b323d85403a947ad3c3c197eec9"
+    const val API_KEY = "YOUR_API_KEY"
+
+    /**
+     * The base URL for the news API.
+     *
+     * This constant defines the root URL for all API requests to the news
+     * service. It's used to construct the full URL for each API endpoint.
+     */
+    const val BASE_URL = "https://newsapi.org/v2/"
 }
