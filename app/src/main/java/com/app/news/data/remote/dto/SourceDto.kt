@@ -11,6 +11,6 @@ package com.app.news.data.remote.dto
  * @property name The name of the source.
  */
 data class SourceDto(
-    val id: String,
-    val name: String
+    val id: String?,
+    val name: String?
 )

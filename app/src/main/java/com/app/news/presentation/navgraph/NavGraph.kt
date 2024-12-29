@@ -1,7 +1,6 @@
 package com.app.news.presentation.navgraph
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -9,6 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.app.news.presentation.home.HomeScreen
+import com.app.news.presentation.home.HomeViewModel
 import com.app.news.presentation.onboarding.OnBoardingScreen
 import com.app.news.presentation.onboarding.OnBoardingViewModel
 
@@ -63,9 +65,18 @@ fun NavGraph(
         ) {
             // Define the composable for the news navigator screen.
             composable(
-                route = Route.NewsNavigatorScreen.route
+                route = Route.NewsNavigatorScreen.route // Route for the news navigator screen.
             ) {
-                Text(text = "News Navigator Screen")
+                // Get the HomeViewModel using Hilt.
+                val viewModel: HomeViewModel = hiltViewModel()
+                // Collect the news articles as LazyPagingItems.
+                val articles = viewModel.news.collectAsLazyPagingItems()
+
+                // Display the home screen.
+                HomeScreen(
+                    articles = articles, // Pass the articles to the home screen.
+                    navigate = {} // Pass the navigate function to the home screen.
+                )
             }
         }
     }

@@ -16,12 +16,12 @@ package com.app.news.data.remote.dto
  * @property urlToImage The URL of the image associated with the article.
  */
 data class ArticleDto(
-    val author: String,
-    val content: String,
-    val description: String,
-    val publishedAt: String,
-    val source: SourceDto,
+    val author: String?,
+    val content: String?,
+    val description: String?,
+    val publishedAt: String?,
+    val source: SourceDto?,
     val title: String,
-    val url: String,
-    val urlToImage: String
+    val url: String?,
+    val urlToImage: String?
 )

@@ -72,4 +72,11 @@ object Dimens {
      */
     val SmallIconSize = 11.dp
 
+    /**
+     * The size of the icons used in the search bar.
+     *
+     * This value defines the height and width of the icons, such as the
+     * search icon in the search bar.
+     */
+    val IconSize = 20.dp
 }

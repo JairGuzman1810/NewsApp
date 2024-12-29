@@ -27,7 +27,7 @@ interface NewsApi {
      * @return A NewsResponse object containing the list of articles and
      *   other response details.
      */
-    @GET
+    @GET("everything")
     suspend fun getNews(
         @Query("page") page: Int,
         @Query("sources") sources: String,

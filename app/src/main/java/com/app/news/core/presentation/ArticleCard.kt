@@ -25,7 +25,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -221,7 +220,7 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
  * within Android Studio. It demonstrates the shimmer effect as it would appear
  * during a loading state.
  */
-@Preview
+@PreviewLightDark
 @Composable
 private fun ArticleCardShimmerEffectPreview() {
     NewsAppTheme {
