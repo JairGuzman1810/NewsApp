@@ -30,4 +30,21 @@ interface NewsRepository {
      *   stream of news articles.
      */
     fun getNews(sources: List<String>): Flow<PagingData<Article>>
+
+    /**
+     * Searches for news articles based on a query and a list of sources.
+     *
+     * This method retrieves news articles that match the provided search query
+     * from the specified sources. The results are returned as a `Flow` of
+     * `PagingData<Article>`, which allows for efficient loading and display of
+     * large datasets in a paginated manner.
+     *
+     * @param searchQuery The query string to search for in the news articles.
+     * @param sources A list of news sources to search within. Each source is
+     *   represented as a string.
+     * @return A `Flow` of `PagingData<Article>` objects, representing the
+     *   stream of news articles that match the search query.
+     */
+    fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>>
+
 }

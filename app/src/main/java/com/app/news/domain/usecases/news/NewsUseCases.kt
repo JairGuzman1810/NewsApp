@@ -8,7 +8,9 @@ package com.app.news.domain.usecases.news
  * and organization of use cases.
  *
  * @property getNews The GetNews use case instance.
+ * @property searchNews The SearchNews use case instance.
  */
 data class NewsUseCases(
     val getNews: GetNews,
+    val searchNews: SearchNews
 )

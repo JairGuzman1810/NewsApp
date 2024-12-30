@@ -12,6 +12,7 @@ import com.app.news.domain.usecases.app_entry.ReadAppEntry
 import com.app.news.domain.usecases.app_entry.SaveAppEntry
 import com.app.news.domain.usecases.news.GetNews
 import com.app.news.domain.usecases.news.NewsUseCases
+import com.app.news.domain.usecases.news.SearchNews
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -109,8 +110,10 @@ object AppModule {
      *
      * This method creates and returns a NewsUseCases instance. This
      * instance is a wrapper for all news-related use cases, such as
-     * GetNews. It depends on a NewsRepository instance, which is also
-     * provided by this module.
+     * GetNews and SearchNews. It depends on a NewsRepository instance,
+     * which is also provided by this module. These use cases are
+     * responsible for interacting with the domain layer to perform
+     * news-related operations.
      *
      * @param newsRepository The NewsRepository instance.
      * @return A NewsUseCases instance.
@@ -120,6 +123,7 @@ object AppModule {
     fun provideNewsUseCases(
         newsRepository: NewsRepository
     ): NewsUseCases = NewsUseCases(
-        getNews = GetNews(newsRepository)
+        getNews = GetNews(newsRepository),
+        searchNews = SearchNews(newsRepository)
     )
 }
