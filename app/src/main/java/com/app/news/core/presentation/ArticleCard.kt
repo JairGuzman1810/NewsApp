@@ -135,7 +135,7 @@ val dummyArticle = Article(
     source = Source(id = "bbc-news", name = "BBC News"),
     title = "Breaking News: Major Event Unfolds",
     url = "https://www.example.com/article",
-    urlToImage = "https://ichef.bbci.co.uk/news/976/cpsprodpb/16620/production/_91408619_91408615.jpg"
+    urlToImage = "https://a.fsdn.com/sd/topics/bitcoin_64.png"
 )
 
 /**

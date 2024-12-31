@@ -1,6 +1,8 @@
 package com.app.news.presentation.navgraph
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -75,7 +77,9 @@ fun NavGraph(
                 // Display the home screen.
                 HomeScreen(
                     articles = articles, // Pass the articles to the home screen.
-                    navigate = {} // Pass the navigate function to the home screen.
+                    navigate = {}, // Pass the navigate function to the home screen.
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.background)
                 )
             }
         }

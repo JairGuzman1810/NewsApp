@@ -79,4 +79,12 @@ object Dimens {
      * search icon in the search bar.
      */
     val IconSize = 20.dp
+
+    /**
+     * The height of the image displayed in the details screen for an article.
+     *
+     * This value defines the height of the image that is shown at the top of
+     * the details screen for a news article.
+     */
+    val ArticleImageHeight = 248.dp
 }
