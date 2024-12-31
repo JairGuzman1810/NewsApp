@@ -1,5 +1,7 @@
 package com.app.news.domain.model
 
+import com.app.news.data.local.entity.ArticleEntity
+
 /**
  * Domain model representing an article.
  *
@@ -25,3 +27,21 @@ data class Article(
     val url: String,
     val urlToImage: String
 )
+
+/**
+ * Extension function to convert an Article domain model to an ArticleEntity.
+ *
+ * @return An ArticleEntity representing the data in this Article.
+ */
+fun Article.toArticleEntity(): ArticleEntity {
+    return ArticleEntity(
+        author = author,
+        content = content,
+        description = description,
+        publishedAt = publishedAt,
+        source = "${source.id},${source.name}",
+        title = title,
+        url = url,
+        urlToImage = urlToImage
+    )
+}

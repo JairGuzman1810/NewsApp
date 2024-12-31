@@ -1,10 +1,14 @@
 package com.app.news.di
 
 import android.app.Application
+import androidx.room.Room
+import com.app.news.data.local.NewsDatabase
+import com.app.news.data.local.dao.NewsDao
 import com.app.news.data.manager.LocalUserManagerImpl
 import com.app.news.data.remote.NewsApi
 import com.app.news.data.repository.NewsRepositoryImpl
 import com.app.news.data.util.Constants.BASE_URL
+import com.app.news.data.util.Constants.NEWS_DATABASE_NAME
 import com.app.news.domain.manager.LocalUserManager
 import com.app.news.domain.repository.NewsRepository
 import com.app.news.domain.usecases.app_entry.AppEntryUseCases
@@ -126,4 +130,39 @@ object AppModule {
         getNews = GetNews(newsRepository),
         searchNews = SearchNews(newsRepository)
     )
+
+    /**
+     * Provides an instance of NewsDatabase.
+     *
+     * This method creates and returns a NewsDatabase instance. This instance
+     * is responsible for managing the local database for news articles.
+     * It uses Room to handle the database operations.
+     *
+     * @param application The application instance.
+     * @return A NewsDatabase instance.
+     */
+    @Provides
+    @Singleton
+    fun provideNewsDatabase(application: Application): NewsDatabase {
+        return Room.databaseBuilder(
+            context = application,
+            klass = NewsDatabase::class.java,
+            name = NEWS_DATABASE_NAME
+        ).fallbackToDestructiveMigration()
+            .build()
+    }
+
+    /**
+     * Provides an instance of NewsDao.
+     *
+     * This method retrieves the NewsDao from the NewsDatabase.
+     *
+     * @param newsDatabase The NewsDatabase instance.
+     * @return A NewsDao instance.
+     */
+    @Provides
+    @Singleton
+    fun provideNewsDao(
+        newsDatabase: NewsDatabase
+    ): NewsDao = newsDatabase.newsDao()
 }

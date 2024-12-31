@@ -43,4 +43,12 @@ object Constants {
      * service. It's used to construct the full URL for each API endpoint.
      */
     const val BASE_URL = "https://newsapi.org/v2/"
+
+    /**
+     * The name of the news database.
+     *
+     * This constant is used as the file name for the Room database that holds
+     * the news articles. It's used when creating the database instance.
+     */
+    const val NEWS_DATABASE_NAME = "news_db"
 }
