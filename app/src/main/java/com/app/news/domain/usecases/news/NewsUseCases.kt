@@ -7,10 +7,16 @@ package com.app.news.domain.usecases.news
  * related to news articles. It allows for easier dependency injection
  * and organization of use cases.
  *
- * @property getNews The GetNews use case instance.
- * @property searchNews The SearchNews use case instance.
+ * @property getNews The use case for retrieving paginated news articles from the network.
+ * @property searchNews The use case for searching news articles from the network.
+ * @property upsertArticle The use case for inserting or updating a bookmarked article in the local database.
+ * @property deleteArticle The use case for deleting a bookmarked article from the local database.
+ * @property selectArticles The use case for retrieving all bookmarked articles from the local database.
  */
 data class NewsUseCases(
     val getNews: GetNews,
-    val searchNews: SearchNews
+    val searchNews: SearchNews,
+    val upsertArticle: UpsertArticle,
+    val deleteArticle: DeleteArticle,
+    val selectArticles: SelectArticles
 )

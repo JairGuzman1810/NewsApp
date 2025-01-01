@@ -14,9 +14,12 @@ import com.app.news.domain.repository.NewsRepository
 import com.app.news.domain.usecases.app_entry.AppEntryUseCases
 import com.app.news.domain.usecases.app_entry.ReadAppEntry
 import com.app.news.domain.usecases.app_entry.SaveAppEntry
+import com.app.news.domain.usecases.news.DeleteArticle
 import com.app.news.domain.usecases.news.GetNews
 import com.app.news.domain.usecases.news.NewsUseCases
 import com.app.news.domain.usecases.news.SearchNews
+import com.app.news.domain.usecases.news.SelectArticles
+import com.app.news.domain.usecases.news.UpsertArticle
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -120,15 +123,20 @@ object AppModule {
      * news-related operations.
      *
      * @param newsRepository The NewsRepository instance.
+     * @param newsDao The NewsDao instance for local database operations.
      * @return A NewsUseCases instance.
      */
     @Provides
     @Singleton
     fun provideNewsUseCases(
-        newsRepository: NewsRepository
+        newsRepository: NewsRepository,
+        newsDao: NewsDao
     ): NewsUseCases = NewsUseCases(
         getNews = GetNews(newsRepository),
-        searchNews = SearchNews(newsRepository)
+        searchNews = SearchNews(newsRepository),
+        upsertArticle = UpsertArticle(newsDao),
+        deleteArticle = DeleteArticle(newsDao),
+        selectArticles = SelectArticles(newsDao)
     )
 
     /**

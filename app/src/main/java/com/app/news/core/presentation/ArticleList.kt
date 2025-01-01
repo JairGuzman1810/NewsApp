@@ -64,6 +64,38 @@ fun ArticlesList(
 }
 
 /**
+ * Composable function that displays a list of articles using a LazyColumn.
+ *
+ * This function takes a list of articles and displays them in a scrollable list.
+ *
+ * @param modifier Modifier for styling the ArticlesList.
+ * @param articles List containing the list of articles to display.
+ * @param onClick Callback function to be executed when an article is clicked.
+ */
+@Composable
+fun ArticlesList(
+    modifier: Modifier = Modifier,
+    articles: List<Article>,
+    onClick: (Article) -> Unit
+) {
+    // LazyColumn to display the list of articles.
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize(), // Fill the available space.
+        verticalArrangement = Arrangement.spacedBy(MediumPadding1), // Add space between items.
+        contentPadding = PaddingValues(all = ExtraSmallPadding) // Add padding around the list.
+    ) {
+        // Display each article in the list.
+        items(count = articles.size) { index ->
+            // Get the article at the current index.
+            val article = articles[index]
+            // Display the ArticleCard for the current article.
+            ArticleCard(article = article, onClick = { onClick(article) })
+        }
+    }
+}
+
+/**
  * Composable function that handles the different loading states of the Paging library.
  *
  * This function checks the current load state of the LazyPagingItems and
