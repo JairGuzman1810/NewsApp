@@ -1,5 +1,7 @@
 package com.app.news.data.util
 
+import com.app.news.BuildConfig
+
 /**
  * Object containing constant values used throughout the data layer.
  *
@@ -34,7 +36,7 @@ object Constants {
      * It's used as a parameter in API requests to identify and authorize
      * the application.
      */
-    const val API_KEY = "YOUR_API_KEY"
+    const val API_KEY = BuildConfig.API_KEY
 
     /**
      * The base URL for the news API.
