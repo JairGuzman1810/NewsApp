@@ -17,8 +17,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.app.news.R
-import com.app.news.presentation.Dimens.MediumPadding1
-import com.app.news.presentation.Dimens.MediumPadding2
+import com.app.news.presentation.theme.Dimens.MediumPadding1
+import com.app.news.presentation.theme.Dimens.MediumPadding2
 import com.app.news.presentation.onboarding.Page
 import com.app.news.presentation.onboarding.pages
 import com.app.news.presentation.theme.NewsAppTheme

@@ -1,5 +1,6 @@
 package com.app.news.presentation.onboarding
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,17 +12,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.app.news.core.presentation.NewsButton
 import com.app.news.core.presentation.NewsTextButton
-import com.app.news.presentation.Dimens.MediumPadding2
-import com.app.news.presentation.Dimens.PageIndicatorWidth
+import com.app.news.presentation.theme.Dimens.MediumPadding2
+import com.app.news.presentation.theme.Dimens.PageIndicatorWidth
 import com.app.news.presentation.onboarding.components.OnBoardingPage
 import com.app.news.presentation.onboarding.components.PageIndicator
 import com.app.news.presentation.theme.NewsAppTheme
@@ -147,12 +149,14 @@ fun OnBoardingScreen(
  * This composable allows you to preview the OnBoardingScreen directly within
  * Android Studio.
  */
-@Preview
+@PreviewLightDark
 @Composable
 private fun OnBoardingScreenPreview() {
     NewsAppTheme {
         OnBoardingScreen(
-            event = {}
+            event = {},
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.background) // Set the background color.
         )
     }
 }

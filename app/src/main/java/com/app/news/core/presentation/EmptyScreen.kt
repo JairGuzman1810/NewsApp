@@ -34,15 +34,22 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 /**
- * Composable function that displays an empty screen with an error message or a default message.
+ * Composable function that displays an empty screen with a relevant message and icon.
  *
- * This function is used to display a screen when there are no articles to show or when an error occurs.
- * It can display different messages and icons based on the provided LoadState.Error.
+ * This function is used to display a screen when there are no articles to show,
+ * when an error occurs, or when a custom message needs to be displayed.
+ * It can display different messages and icons based on the provided:
+ * - `LoadState.Error`: For displaying error-related messages.
+ * - `customMessage`: For displaying a specific message when no error is present.
  *
  * @param error Optional LoadState.Error object to display a specific error message.
+ * @param customMessage Optional custom message to display when there is no error.
  */
 @Composable
-fun EmptyScreen(error: LoadState.Error? = null) {
+fun EmptyScreen(
+    error: LoadState.Error? = null,
+    customMessage: String? = null,
+) {
     // Determine the message to display based on the error.
     var message by remember {
         mutableStateOf(parseErrorMessage(error = error))
@@ -55,7 +62,7 @@ fun EmptyScreen(error: LoadState.Error? = null) {
 
     // If there's no error, display a default message and icon.
     if (error == null) {
-        message = "You have not saved news so far !" // Default message when there's no error.
+        message = customMessage ?: "You have not saved news so far !" // Use custom message if provided, else default.
         icon = R.drawable.ic_search_document // Default icon when there's no error.
     }
 
@@ -67,8 +74,8 @@ fun EmptyScreen(error: LoadState.Error? = null) {
     // Animation for the alpha value of the icon and text.
     val alphaAnimation by animateFloatAsState(
         targetValue = if (startAnimation) 0.3f else 0f, // Target alpha value.
-        animationSpec = tween(durationMillis = 1000), // Animation duration.
-        label = ""
+        animationSpec = tween(durationMillis = 1500), // Animation duration.
+        label = "EmptyAnimation"
     )
 
     // Start the animation when the composable is launched.

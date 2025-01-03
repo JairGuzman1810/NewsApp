@@ -1,4 +1,4 @@
-package com.app.news.presentation
+package com.app.news.presentation.theme
 
 import androidx.compose.ui.unit.dp
 

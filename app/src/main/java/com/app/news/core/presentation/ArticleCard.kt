@@ -32,11 +32,11 @@ import coil.request.ImageRequest
 import com.app.news.R
 import com.app.news.domain.model.Article
 import com.app.news.domain.model.Source
-import com.app.news.presentation.Dimens.ArticleCardSize
-import com.app.news.presentation.Dimens.ExtraSmallPadding
-import com.app.news.presentation.Dimens.ExtraSmallPadding2
-import com.app.news.presentation.Dimens.MediumPadding1
-import com.app.news.presentation.Dimens.SmallIconSize
+import com.app.news.presentation.theme.Dimens.ArticleCardSize
+import com.app.news.presentation.theme.Dimens.ExtraSmallPadding
+import com.app.news.presentation.theme.Dimens.ExtraSmallPadding2
+import com.app.news.presentation.theme.Dimens.MediumPadding1
+import com.app.news.presentation.theme.Dimens.SmallIconSize
 import com.app.news.presentation.theme.NewsAppTheme
 
 /**

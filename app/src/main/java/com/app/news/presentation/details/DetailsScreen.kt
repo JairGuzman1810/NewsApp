@@ -25,8 +25,8 @@ import coil.compose.AsyncImage
 import com.app.news.R
 import com.app.news.core.presentation.dummyArticle
 import com.app.news.domain.model.Article
-import com.app.news.presentation.Dimens.ArticleImageHeight
-import com.app.news.presentation.Dimens.MediumPadding1
+import com.app.news.presentation.theme.Dimens.ArticleImageHeight
+import com.app.news.presentation.theme.Dimens.MediumPadding1
 import com.app.news.presentation.details.components.DetailsTopBar
 import com.app.news.presentation.theme.NewsAppTheme
 

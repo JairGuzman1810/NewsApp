@@ -1,10 +1,13 @@
-package com.app.news
+package com.app.news.presentation.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.app.news.presentation.navgraph.NavGraph
 import com.app.news.presentation.theme.NewsAppTheme
@@ -52,7 +55,9 @@ class MainActivity : ComponentActivity() {
                 val startDestination = viewModel.startDestination
                 // Display the navigation graph.
                 NavGraph(
-                    startDestination = startDestination
+                    startDestination = startDestination,
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.background)
                 )
             }
         }

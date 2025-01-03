@@ -17,8 +17,8 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.app.news.domain.model.Article
-import com.app.news.presentation.Dimens.ExtraSmallPadding
-import com.app.news.presentation.Dimens.MediumPadding1
+import com.app.news.presentation.theme.Dimens.ExtraSmallPadding
+import com.app.news.presentation.theme.Dimens.MediumPadding1
 import com.app.news.presentation.theme.NewsAppTheme
 import kotlinx.coroutines.flow.flowOf
 
@@ -78,19 +78,25 @@ fun ArticlesList(
     articles: List<Article>,
     onClick: (Article) -> Unit
 ) {
-    // LazyColumn to display the list of articles.
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize(), // Fill the available space.
-        verticalArrangement = Arrangement.spacedBy(MediumPadding1), // Add space between items.
-        contentPadding = PaddingValues(all = ExtraSmallPadding) // Add padding around the list.
-    ) {
-        // Display each article in the list.
-        items(count = articles.size) { index ->
-            // Get the article at the current index.
-            val article = articles[index]
-            // Display the ArticleCard for the current article.
-            ArticleCard(article = article, onClick = { onClick(article) })
+    // Check if the list of articles is empty.
+    if (articles.isEmpty()) {
+        // If the list is empty, display the EmptyScreen.
+        EmptyScreen()
+    } else {
+        // If the list is not empty, display the articles in a LazyColumn.
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize(), // Fill the available space.
+            verticalArrangement = Arrangement.spacedBy(MediumPadding1), // Add space between items.
+            contentPadding = PaddingValues(all = ExtraSmallPadding) // Add padding around the list.
+        ) {
+            // Display each article in the list.
+            items(count = articles.size) { index ->
+                // Get the article at the current index.
+                val article = articles[index]
+                // Display the ArticleCard for the current article.
+                ArticleCard(article = article, onClick = { onClick(article) })
+            }
         }
     }
 }
@@ -128,9 +134,16 @@ fun handlePagingResult(
         }
         // If there's an error, show the empty screen.
         error != null -> {
-            EmptyScreen()
+            EmptyScreen(error = error)
             false // Don't display the list.
         }
+
+        // If there are no items, show the empty screen with a custom message.
+        articles.itemCount < 1 -> {
+            EmptyScreen(customMessage = "No articles found.")
+            false // Don't display the list.
+        }
+
         // Otherwise, the list is ready to be displayed.
         else -> {
             true // Display the list.

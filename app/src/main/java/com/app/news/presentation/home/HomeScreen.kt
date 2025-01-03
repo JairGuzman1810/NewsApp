@@ -33,8 +33,8 @@ import com.app.news.core.presentation.ArticlesList
 import com.app.news.core.presentation.SearchBar
 import com.app.news.core.presentation.dummyArticle
 import com.app.news.domain.model.Article
-import com.app.news.presentation.Dimens.ExtraSmallPadding2
-import com.app.news.presentation.Dimens.MediumPadding1
+import com.app.news.presentation.theme.Dimens.ExtraSmallPadding2
+import com.app.news.presentation.theme.Dimens.MediumPadding1
 import com.app.news.presentation.theme.NewsAppTheme
 import kotlinx.coroutines.flow.flowOf
 

@@ -20,8 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.app.news.R
-import com.app.news.presentation.Dimens.ExtraSmallPadding2
-import com.app.news.presentation.Dimens.IconSize
+import com.app.news.presentation.theme.Dimens.ExtraSmallPadding2
+import com.app.news.presentation.theme.Dimens.IconSize
 import com.app.news.presentation.theme.NewsAppTheme
 
 /**

@@ -1,8 +1,6 @@
 package com.app.news.presentation.navgraph
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -54,7 +52,6 @@ fun NavGraph(
                     event = viewModel::onEvent, // Pass the onEvent function reference to the OnBoardingScreen.
                     modifier = Modifier
                         .fillMaxSize() // Make the onboarding screen fill the available space.
-                        .background(MaterialTheme.colorScheme.background)
                 )
             }
         }
