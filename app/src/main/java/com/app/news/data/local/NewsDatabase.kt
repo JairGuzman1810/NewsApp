@@ -11,7 +11,7 @@ import com.app.news.data.local.entity.ArticleEntity
  * This class defines the database configuration and provides access to the DAOs.
  * It includes both ArticleEntity and SourceEntity as entities in the database.
  */
-@Database(entities = [ArticleEntity::class], version = 1)
+@Database(entities = [ArticleEntity::class], version = 1, exportSchema = false)
 abstract class NewsDatabase : RoomDatabase() {
 
     /**

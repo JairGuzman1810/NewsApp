@@ -47,4 +47,35 @@ interface NewsRepository {
      */
     fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>>
 
+    /**
+     * Inserts or updates an article in the local database.
+     *
+     * This method saves an article to the local database. If an article with the same URL already
+     * exists, it will be replaced.
+     *
+     * @param article The Article object to insert or update.
+     */
+    suspend fun upsertArticle(article: Article)
+
+    /**
+     * Deletes an article from the local database by its URL.
+     *
+     * @param url The URL of the article to delete.
+     */
+    suspend fun deleteArticle(url: String)
+
+    /**
+     * Retrieves all articles from the local database.
+     *
+     * @return A Flow emitting a list of Article objects representing all articles in the local database.
+     */
+    fun selectArticles(): Flow<List<Article>>
+
+    /**
+     * Retrieves a specific article from the local database by its URL.
+     *
+     * @param url The URL of the article to retrieve.
+     * @return The Article object if found, or null if no article with the given URL exists.
+     */
+    suspend fun selectArticle(url: String): Article?
 }

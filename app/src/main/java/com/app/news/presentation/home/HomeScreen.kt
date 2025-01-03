@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
@@ -36,24 +35,30 @@ import com.app.news.core.presentation.dummyArticle
 import com.app.news.domain.model.Article
 import com.app.news.presentation.Dimens.ExtraSmallPadding2
 import com.app.news.presentation.Dimens.MediumPadding1
-import com.app.news.presentation.navgraph.Route
 import com.app.news.presentation.theme.NewsAppTheme
 import kotlinx.coroutines.flow.flowOf
 
 /**
  * Composable function that displays the home screen of the news application.
  *
- * This function displays the application logo, a search bar, a scrolling
- * list of article titles, and a list of articles.
+ * This screen displays a list of news articles fetched from various sources.
+ * It includes a search bar for navigating to the search screen and a list
+ * of articles that can be clicked to view their details.
  *
  * @param articles LazyPagingItems containing the list of articles to display.
- * @param navigate Callback function to navigate to different screens.
- * @param modifier Modifier for styling the HomeScreen.
+ *                 These articles are loaded in a paginated manner for
+ *                 efficient handling of large datasets.
+ * @param navigateToSearch Callback function to navigate to the search screen.
+ * @param navigateToDetails Callback function to navigate to the details screen
+ *                          for a specific article. It receives the selected
+ *                          Article as a parameter.
+ * @param modifier Modifier for styling and layout customization of the HomeScreen.
  */
 @Composable
 fun HomeScreen(
     articles: LazyPagingItems<Article>,
-    navigate: (String) -> Unit,
+    navigateToSearch: () -> Unit,
+    navigateToDetails: (Article) -> Unit,
     modifier: Modifier = Modifier
 ) {
     // Create a derived state of the article titles to display in the marquee.
@@ -76,7 +81,6 @@ fun HomeScreen(
             .fillMaxSize() // Fill the available space.
             .padding(top = MediumPadding1) // Add padding at the top.
             .statusBarsPadding() // Add padding for the status bar.
-            .navigationBarsPadding()
     ) {
         // Display the application logo.
         Image(
@@ -100,7 +104,7 @@ fun HomeScreen(
             onValueChange = {}, // No action on text change.
             onSearch = {}, // No action on search.
             onClick = {
-                navigate(Route.SearchScreen.route) // Navigate to the search screen when clicked.
+                navigateToSearch() // Navigate to the search screen when clicked.
             }
         )
 
@@ -125,7 +129,7 @@ fun HomeScreen(
         ArticlesList(
             modifier = Modifier.padding(horizontal = ExtraSmallPadding2), // Add horizontal padding.
             articles = articles, // The articles to display.
-            onClick = { navigate(Route.DetailsScreen.route) } // Navigate to the details screen when an article is clicked.
+            onClick = { navigateToDetails(it) } // Navigate to the details screen when an article is clicked.
         )
     }
 }
@@ -165,7 +169,8 @@ fun HomeScreenPreview() {
                     )
                 )
             ).collectAsLazyPagingItems(),
-            navigate = {},
+            navigateToSearch = {},
+            navigateToDetails = {},
             modifier = Modifier.background(MaterialTheme.colorScheme.background)
         )
     }

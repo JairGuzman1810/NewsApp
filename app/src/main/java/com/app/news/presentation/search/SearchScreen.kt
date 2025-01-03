@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
@@ -16,9 +15,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.app.news.core.presentation.ArticlesList
 import com.app.news.core.presentation.SearchBar
 import com.app.news.core.presentation.dummyArticle
+import com.app.news.domain.model.Article
 import com.app.news.presentation.Dimens.ExtraSmallPadding2
 import com.app.news.presentation.Dimens.MediumPadding1
-import com.app.news.presentation.navgraph.Route
 import com.app.news.presentation.theme.NewsAppTheme
 import kotlinx.coroutines.flow.flowOf
 
@@ -29,14 +28,14 @@ import kotlinx.coroutines.flow.flowOf
  *
  * @param state The current state of the search screen.
  * @param event Callback for search events.
- * @param navigate Callback for navigation.
+ * @param navigateToDetails Callback for navigation.
  * @param modifier Modifier for styling.
  */
 @Composable
 fun SearchScreen(
     state: SearchState,
     event: (SearchEvent) -> Unit,
-    navigate: (String) -> Unit,
+    navigateToDetails: (Article) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     // Main content column.
@@ -44,7 +43,6 @@ fun SearchScreen(
         modifier = modifier
             .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1) // Add padding.
             .statusBarsPadding() // Add padding for the status bar.
-            .navigationBarsPadding() // Add padding for the navigation bar.
             .fillMaxSize() // Fill the available space.
     ) {
         // Search bar.
@@ -59,11 +57,11 @@ fun SearchScreen(
         Spacer(modifier = Modifier.padding(ExtraSmallPadding2)) // Add a small space.
 
         // Article list.
-        state.articles?.let {
-            val articles = it.collectAsLazyPagingItems() // Collect articles as lazy paging items.
+        state.articles?.let { items ->
+            val articles = items.collectAsLazyPagingItems() // Collect articles as lazy paging items.
             ArticlesList(
                 articles = articles, // Display the articles.
-                onClick = { navigate(Route.DetailsScreen.route) } // Navigate to details screen on click.
+                onClick = { navigateToDetails(it) } // Navigate to details screen on click.
             )
         }
     }
@@ -93,7 +91,7 @@ fun SearchScreenPreview() {
                 )
             ),
             event = {},
-            navigate = {},
+            navigateToDetails = {},
             modifier = Modifier.background(MaterialTheme.colorScheme.background)
         )
     }

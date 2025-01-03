@@ -12,11 +12,13 @@ package com.app.news.domain.usecases.news
  * @property upsertArticle The use case for inserting or updating a bookmarked article in the local database.
  * @property deleteArticle The use case for deleting a bookmarked article from the local database.
  * @property selectArticles The use case for retrieving all bookmarked articles from the local database.
+ * @property selectArticle The use case for retrieving a specific bookmarked article from the local database.
  */
 data class NewsUseCases(
     val getNews: GetNews,
     val searchNews: SearchNews,
     val upsertArticle: UpsertArticle,
     val deleteArticle: DeleteArticle,
-    val selectArticles: SelectArticles
+    val selectArticles: SelectArticles,
+    val selectArticle: SelectArticle
 )

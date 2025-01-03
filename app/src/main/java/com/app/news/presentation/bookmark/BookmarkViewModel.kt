@@ -47,7 +47,7 @@ class BookmarkViewModel @Inject constructor(
     private fun getArticles() {
         newsUseCases.selectArticles().onEach {
             // Update the state with the new list of articles.
-            _state.value = _state.value.copy(articles = it)
+            _state.value = _state.value.copy(articles = it.asReversed())
         }.launchIn(viewModelScope) // Launch the coroutine in the ViewModel's scope.
     }
 }

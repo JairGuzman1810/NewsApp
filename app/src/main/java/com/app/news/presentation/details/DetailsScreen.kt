@@ -78,7 +78,7 @@ fun DetailsScreen(
                 }
             },
             onBookmarkClick = { // Handle bookmark click.
-                event(DetailsEvent.SaveArticle) // Trigger the save article event.
+                event(DetailsEvent.UpsertDeleteArticle(article)) // Trigger the save/delete article event.
             },
             onBackClick = navigateUp // Handle back click.
         )

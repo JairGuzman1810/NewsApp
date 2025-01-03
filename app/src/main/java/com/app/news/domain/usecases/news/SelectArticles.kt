@@ -1,38 +1,33 @@
 package com.app.news.domain.usecases.news
 
-import com.app.news.data.local.dao.NewsDao
 import com.app.news.domain.model.Article
+import com.app.news.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 /**
  * Use case for retrieving all bookmarked articles from the local database.
  *
  * This use case encapsulates the logic for fetching all bookmarked
- * articles from the local database. It uses the NewsDao to perform the
- * database operation and converts the ArticleEntity objects to Article
- * domain models.
+ * articles from the local database. It uses the NewsRepository to perform the
+ * database operation and returns a flow of Article domain models.
  *
- * @property newsDao The NewsDao instance used to interact with the
- *   local database.
+ * @property newsRepository The repository for interacting with news data.
  */
 class SelectArticles(
-    private val newsDao: NewsDao
+    private val newsRepository: NewsRepository
 ) {
 
     /**
      * Invokes the use case to retrieve all bookmarked articles.
      *
      * This method is the primary entry point for executing the use case.
-     * It retrieves all articles from the database and converts them to
-     * Article domain models.
+     * It retrieves all articles from the database and returns them as a
+     * Flow of List<Article> domain models.
      *
-     * @return A Flow of List<Article> objects, representing the stream
+     * @return A Flow emitting a List of Article objects, representing the stream
      *   of bookmarked articles.
      */
     operator fun invoke(): Flow<List<Article>> {
-        return newsDao.getAllArticles().map { articleEntities ->
-            articleEntities.map { it.toArticle() }
-        }
+        return newsRepository.selectArticles()
     }
 }

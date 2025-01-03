@@ -18,6 +18,7 @@ import com.app.news.domain.usecases.news.DeleteArticle
 import com.app.news.domain.usecases.news.GetNews
 import com.app.news.domain.usecases.news.NewsUseCases
 import com.app.news.domain.usecases.news.SearchNews
+import com.app.news.domain.usecases.news.SelectArticle
 import com.app.news.domain.usecases.news.SelectArticles
 import com.app.news.domain.usecases.news.UpsertArticle
 import dagger.Module
@@ -99,44 +100,45 @@ object AppModule {
      * Provides an instance of NewsRepository.
      *
      * This method creates and returns a NewsRepositoryImpl instance. This
-     * instance is responsible for fetching news articles from the network.
-     * It depends on a NewsApi instance, which is also provided by this
-     * module.
+     * instance is responsible for fetching news articles from the network and the local database.
+     * It depends on a NewsApi instance for network operations and a NewsDao instance for local database operations,
+     * both of which are also provided by this module.
      *
-     * @param newsApi The NewsApi instance.
+     * @param newsApi The NewsApi instance for network operations.
+     * @param newsDao The NewsDao instance for local database operations.
      * @return A NewsRepository instance.
      */
     @Singleton
     @Provides
     fun provideNewsRepository(
-        newsApi: NewsApi
-    ): NewsRepository = NewsRepositoryImpl(newsApi)
+        newsApi: NewsApi,
+        newsDao: NewsDao
+    ): NewsRepository = NewsRepositoryImpl(newsApi, newsDao)
 
     /**
      * Provides an instance of NewsUseCases.
      *
      * This method creates and returns a NewsUseCases instance. This
      * instance is a wrapper for all news-related use cases, such as
-     * GetNews and SearchNews. It depends on a NewsRepository instance,
-     * which is also provided by this module. These use cases are
-     * responsible for interacting with the domain layer to perform
-     * news-related operations.
+     * GetNews, SearchNews, UpsertArticle, DeleteArticle, SelectArticles, and SelectArticle.
+     * It depends on a NewsRepository instance, which is also provided by this module.
+     * These use cases are responsible for interacting with the domain layer to perform
+     * news-related operations, including network and local database interactions.
      *
      * @param newsRepository The NewsRepository instance.
-     * @param newsDao The NewsDao instance for local database operations.
      * @return A NewsUseCases instance.
      */
     @Provides
     @Singleton
     fun provideNewsUseCases(
         newsRepository: NewsRepository,
-        newsDao: NewsDao
     ): NewsUseCases = NewsUseCases(
         getNews = GetNews(newsRepository),
         searchNews = SearchNews(newsRepository),
-        upsertArticle = UpsertArticle(newsDao),
-        deleteArticle = DeleteArticle(newsDao),
-        selectArticles = SelectArticles(newsDao)
+        upsertArticle = UpsertArticle(newsRepository),
+        deleteArticle = DeleteArticle(newsRepository),
+        selectArticles = SelectArticles(newsRepository),
+        selectArticle = SelectArticle(newsRepository)
     )
 
     /**

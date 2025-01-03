@@ -4,11 +4,13 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.app.news.data.local.dao.NewsDao
 import com.app.news.data.remote.NewPagingSource
 import com.app.news.data.remote.NewsApi
 import com.app.news.data.remote.SearchNewsPagingSource
 import com.app.news.data.remote.mappers.toArticle
 import com.app.news.domain.model.Article
+import com.app.news.domain.model.toArticleEntity
 import com.app.news.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -16,14 +18,17 @@ import kotlinx.coroutines.flow.map
 /**
  * Implementation of the NewsRepository interface.
  *
- * This class is responsible for fetching news articles from the network
- * and mapping them to domain models. It uses the NewPagingSource to
- * handle pagination and the NewsApi to make network requests.
+ * This class is responsible for fetching news articles from the network and local database,
+ * mapping them to domain models, and managing the local storage of articles.
+ * It uses NewPagingSource and SearchNewsPagingSource to handle pagination for network requests,
+ * and NewsDao for local database operations.
  *
  * @property newsApi The NewsApi instance used to make network requests.
+ * @property newsDao The NewsDao instance used for local database operations.
  */
 class NewsRepositoryImpl(
-    private val newsApi: NewsApi
+    private val newsApi: NewsApi,
+    private val newsDao: NewsDao
 ) : NewsRepository {
     /**
      * Retrieves a stream of news articles from the specified sources.
@@ -81,5 +86,44 @@ class NewsRepositoryImpl(
             // Map the PagingData<ArticleDto> to PagingData<Article> using the toArticle mapper.
             pagingData.map { it.toArticle() } // Map ArticleDto to Article here
         }
+    }
+
+    /**
+     * Inserts or updates an Article in the local database.
+     *
+     * @param article The Article to be inserted or updated.
+     */
+    override suspend fun upsertArticle(article: Article) {
+        newsDao.upsert(article.toArticleEntity())
+    }
+
+    /**
+     * Deletes an Article from the local database based on its URL.
+     *
+     * @param url The URL of the Article] to be deleted.
+     */
+    override suspend fun deleteArticle(url: String) {
+        newsDao.delete(url)
+    }
+
+    /**
+     * Retrieves all saved Articles from the local database.
+     *
+     * @return A Flow emitting a List of Articles.
+     */
+    override fun selectArticles(): Flow<List<Article>> {
+        return newsDao.getAllArticles().map { articleEntities ->
+            articleEntities.map { it.toArticle() }
+        }
+    }
+
+    /**
+     * Retrieves a specific Article from the local database based on its URL.
+     *
+     * @param url The URL of the Article to be retrieved.
+     * @return The Article if found, or null otherwise.
+     */
+    override suspend fun selectArticle(url: String): Article? {
+        return newsDao.getArticle(url)?.toArticle()
     }
 }

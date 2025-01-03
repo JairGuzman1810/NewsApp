@@ -1,7 +1,6 @@
 package com.app.news.data.local.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -29,12 +28,12 @@ interface NewsDao {
 
 
     /**
-     * Deletes all articles from the database.
+     * Deletes an article from the database by its URL.
      *
-     * This method removes all rows from the "article" table.
+     * @param url The URL of the article to delete.
      */
-    @Delete
-    suspend fun delete(articleEntity: ArticleEntity)
+    @Query("DELETE FROM article WHERE url=:url")
+    suspend fun delete(url: String)
 
     /**
      * Retrieves all articles from the database.
@@ -43,4 +42,14 @@ interface NewsDao {
      */
     @Query("SELECT * FROM article")
     fun getAllArticles(): Flow<List<ArticleEntity>>
+
+
+    /**
+     * Retrieves a specific article from the database by its URL.
+     *
+     * @param url The URL of the article to retrieve.
+     * @return The ArticleEntity if found, or null if no article with the given URL exists.
+     */
+    @Query("SELECT * FROM article WHERE url=:url")
+    suspend fun getArticle(url: String): ArticleEntity?
 }

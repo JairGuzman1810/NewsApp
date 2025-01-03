@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
@@ -18,8 +17,8 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.app.news.R
 import com.app.news.core.presentation.ArticlesList
 import com.app.news.core.presentation.dummyArticle
+import com.app.news.domain.model.Article
 import com.app.news.presentation.Dimens.MediumPadding1
-import com.app.news.presentation.navgraph.Route
 import com.app.news.presentation.theme.NewsAppTheme
 
 /**
@@ -28,13 +27,13 @@ import com.app.news.presentation.theme.NewsAppTheme
  * This screen displays a list of bookmarked articles.
  *
  * @param state The current state of the Bookmark screen, containing the list of bookmarked articles.
- * @param navigate Callback function to navigate to another screen.
+ * @param navigateToDetails Callback function to navigate to another screen.
  * @param modifier Modifier for styling the BookmarkScreen.
  */
 @Composable
 fun BookmarkScreen(
     state: BookmarkState,
-    navigate: (String) -> Unit,
+    navigateToDetails: (Article) -> Unit,
     modifier: Modifier = Modifier
 ) {
     // Main layout for the Bookmark screen.
@@ -42,7 +41,6 @@ fun BookmarkScreen(
         modifier = modifier
             .fillMaxSize() // Fill the entire screen.
             .statusBarsPadding() // Add padding for the status bar.
-            .navigationBarsPadding() // Add padding for the navigation bars.
             .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1) // Add padding around the content.
     ) {
         // Title text for the Bookmark screen.
@@ -60,7 +58,7 @@ fun BookmarkScreen(
         // Display the list of bookmarked articles.
         ArticlesList(
             articles = state.articles, // List of articles to display.
-            onClick = { navigate(Route.DetailsScreen.route) } // Navigate to the details screen when an article is clicked.
+            onClick = { navigateToDetails(it) } // Navigate to the details screen when an article is clicked.
         )
     }
 }
@@ -85,7 +83,7 @@ private fun BookmarkScreenPreview() {
                     dummyArticle
                 )
             ),
-            navigate = {}, // No navigation in the preview.
+            navigateToDetails = {}, // No navigation in the preview.
             modifier = Modifier
                 .background(color = MaterialTheme.colorScheme.background) // Background color for the preview.
         )

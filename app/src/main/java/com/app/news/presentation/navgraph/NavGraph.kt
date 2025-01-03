@@ -10,9 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import androidx.paging.compose.collectAsLazyPagingItems
-import com.app.news.presentation.home.HomeScreen
-import com.app.news.presentation.home.HomeViewModel
+import com.app.news.presentation.news_navigator.NewsNavigator
 import com.app.news.presentation.onboarding.OnBoardingScreen
 import com.app.news.presentation.onboarding.OnBoardingViewModel
 
@@ -56,6 +54,7 @@ fun NavGraph(
                     event = viewModel::onEvent, // Pass the onEvent function reference to the OnBoardingScreen.
                     modifier = Modifier
                         .fillMaxSize() // Make the onboarding screen fill the available space.
+                        .background(MaterialTheme.colorScheme.background)
                 )
             }
         }
@@ -69,18 +68,7 @@ fun NavGraph(
             composable(
                 route = Route.NewsNavigatorScreen.route // Route for the news navigator screen.
             ) {
-                // Get the HomeViewModel using Hilt.
-                val viewModel: HomeViewModel = hiltViewModel()
-                // Collect the news articles as LazyPagingItems.
-                val articles = viewModel.news.collectAsLazyPagingItems()
-
-                // Display the home screen.
-                HomeScreen(
-                    articles = articles, // Pass the articles to the home screen.
-                    navigate = {}, // Pass the navigate function to the home screen.
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.background)
-                )
+                NewsNavigator() // Display the news navigator screen.
             }
         }
     }
